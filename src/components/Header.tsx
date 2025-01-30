@@ -29,7 +29,7 @@ export function Header() {
 
   return (
     <header
-      className="w-full h-36 py-6 flex items-center justify-between flex-col gap-2 relative z-50 bg-transparent"
+      className="w-full h-36 py-6 flex items-center justify-between flex-col gap-2 relative z-50 bg-white"
     >
       {isList && isAuthenticated && (
         <>
