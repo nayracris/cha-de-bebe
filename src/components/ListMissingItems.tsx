@@ -31,32 +31,32 @@ export function ListMissingItems({
       </div>
       {/* Corpo da lista */}
       <div className="bg-opaque-500 overflow-y-auto h-[calc(100%-28px)] w-full scrollbar-thin scrollbar-track-zinc-50 scrollbar-thumb-zinc-900">
-        {items.map(({ id, item }, index) => (
-          <div
-            key={id}
-            className={`flex justify-center items-center h-max hover:bg-blue-300 cursor-pointer ${
-              index % 2 === 0 ? "bg-blue-100" : "bg-custom-softGray"
-            } py-2`}
-          >
-            <label
-              htmlFor={`${id}`}
-              className="cursor-pointer text-zinc-900 flex items-center justify-center h-full text-center text-lg font-medium px-1 py-0.5 w-[61%]"
+        {items && items.length > 0 ? (
+          items.map(({ id, item }, index) => (
+            <div
+              key={id}
+              className={`flex justify-center items-center h-max hover:bg-blue-300 cursor-pointer ${
+                index % 2 === 0 ? "bg-blue-100" : "bg-custom-softGray"
+              } py-2`}
             >
-              {item}
-            </label>
-            {isList && (
-              <span className="flex items-center justify-center w-[39%] h-full text-center text-lg px-1 py-0.5">
-                <SetItemCheckbox
-                  itemId={id}
-                  changeItem={refreshItems!}
-                  labelId={`${id}`}
-                />
-              </span>
-            )}
-          </div>
-        ))}
-        {/* Mensagem quando não há itens */}
-        {!items.length && (
+              <label
+                htmlFor={`${id}`}
+                className="cursor-pointer text-zinc-900 flex items-center justify-center h-full text-center text-lg font-medium px-1 py-0.5 w-[61%]"
+              >
+                {item}
+              </label>
+              {isList && (
+                <span className="flex items-center justify-center w-[39%] h-full text-center text-lg px-1 py-0.5">
+                  <SetItemCheckbox
+                    itemId={id}
+                    changeItem={refreshItems!}
+                    labelId={`${id}`}
+                  />
+                </span>
+              )}
+            </div>
+          ))
+        ) : (
           <div className="gap-4 flex flex-col justify-center items-center h-full text-center font-pacifico text-lg">
             Não há mais presentes disponíveis!
             <br />

@@ -3,11 +3,9 @@ import { ListMissingItems } from "@/components/ListMissingItems";
 import { ListUserItems } from "@/components/ListUserItems";
 import { useAuthContext } from "@/context/AuthContext";
 import { api, setToken } from "@/services/api";
-import { recoverUserInformation } from "@/services/auth";
 import { Items } from "@prisma/client";
-import { GetServerSideProps } from "next";
-import React, { useState } from "react";
-import { parseCookies, destroyCookie } from "nookies";
+import { useEffect, useState } from "react";
+import { parseCookies } from "nookies";
 import { Notes } from "@/components/Notes";
 
 const USER_TOKEN = "CHA_DE_BEBE_TOKEN";
@@ -29,14 +27,32 @@ export default function List({
     const LIST_URL = "/api/list/items";
     const USER_LIST_URL = "/api/list/user";
     const token = parseCookies(null)[USER_TOKEN];
+
+    if (!token) {
+      // Se não houver token, redireciona para a página de login
+      window.location.href = "/singIn";
+      return;
+    }
+
     setToken(token);
-    const [listResponse, userListResponse] = await Promise.all([
-      api.get(LIST_URL),
-      api.get(USER_LIST_URL),
-    ]);
-    setItems(listResponse.data);
-    setUserItems(userListResponse.data);
+
+    try {
+      const [listResponse, userListResponse] = await Promise.all([
+        api.get(LIST_URL),
+        api.get(USER_LIST_URL),
+      ]);
+      setItems(listResponse.data);
+      setUserItems(userListResponse.data);
+    } catch (error) {
+      console.error("Erro ao recuperar a lista de itens:", error);
+    }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      refreshItems(); // Chama refreshItems quando o usuário estiver autenticado
+    }
+  }, [isAuthenticated]);
 
   return (
     <>
@@ -79,49 +95,3 @@ export default function List({
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const token = parseCookies(ctx)[USER_TOKEN];
-  try {
-    if (!token) {
-      if (ctx.req.url === "/list") {
-        destroyCookie(ctx, USER_TOKEN);
-        return {
-          redirect: {
-            destination: "/singIn",
-            permanent: false,
-          },
-        };
-      }
-    }
-
-    recoverUserInformation(token);
-  } catch (error) {
-    if (ctx.req.url === "/list") {
-      destroyCookie(ctx, USER_TOKEN);
-      return {
-        redirect: {
-          destination: "/singIn",
-          permanent: false,
-        },
-      };
-    }
-  }
-
-  const LIST_URL = "/api/list/items";
-  const USER_LIST_URL = "/api/list/user";
-  const [{ data: items }, { data: userItems }] = await Promise.all([
-    api.get(LIST_URL),
-    (async () => {
-      setToken(token);
-      return await api.get(USER_LIST_URL);
-    })(),
-  ]);
-
-  return {
-    props: {
-      items,
-      userItems,
-    },
-  };
-};

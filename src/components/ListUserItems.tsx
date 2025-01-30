@@ -20,30 +20,31 @@ export function ListUserItems({ userItems, refreshItems }: ListUserItemsProps) {
         </span>
       </div>
       <div className="bg-opaque-500 overflow-y-auto h-[calc(100%-28px)] w-full scrollbar-thin scrollbar-track-zinc-50 scrollbar-thumb-zinc-900">
-        {userItems.map(({ id, item }, index) => (
-          <div
-            key={id}
-            className={`flex justify-center items-center h-max hover:bg-blue-300 cursor-pointer ${
-              index % 2 === 0 ? "bg-blue-100" : "bg-custom-softGray py-6"
-            }`}
-          >
-            <label
-              htmlFor={`${id}`}
-              className="cursor-pointer text-zinc-900 flex items-center justify-center h-full text-center text-lg font-medium px-2 py-1 w-[61%]"
+        {userItems && userItems.length > 0 ? (
+          userItems.map(({ id, item }, index) => (
+            <div
+              key={id}
+              className={`flex justify-center items-center h-max hover:bg-blue-300 cursor-pointer ${
+                index % 2 === 0 ? "bg-blue-100" : "bg-custom-softGray py-6"
+              }`}
             >
-              {item}
-            </label>
-            <span className="flex items-center justify-center w-[39%] h-full text-center text-lg px-2 py-1">
-              <SetItemCheckbox
-                itemId={id}
-                changeItem={refreshItems!}
-                isChecked
-                labelId={`${id}`}
-              />
-            </span>
-          </div>
-        ))}
-        {!userItems.length && (
+              <label
+                htmlFor={`${id}`}
+                className="cursor-pointer text-zinc-900 flex items-center justify-center h-full text-center text-lg font-medium px-2 py-1 w-[61%]"
+              >
+                {item}
+              </label>
+              <span className="flex items-center justify-center w-[39%] h-full text-center text-lg px-2 py-1">
+                <SetItemCheckbox
+                  itemId={id}
+                  changeItem={refreshItems!}
+                  isChecked
+                  labelId={`${id}`}
+                />
+              </span>
+            </div>
+          ))
+        ) : (
           <div className="gap-4 flex flex-col justify-center items-center h-full text-center font-pacifico text-lg">
             Escolha o que você gostaria de presentear!
             <br />
