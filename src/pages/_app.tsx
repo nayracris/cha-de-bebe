@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <LoadingContext>
       <AuthProvider>
         <Layout>
-          <Component {...pageProps} />;
+          <Component {...pageProps} /> {/* Removi o ponto e vírgula aqui */}
         </Layout>
       </AuthProvider>
     </LoadingContext>
