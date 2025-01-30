@@ -8,8 +8,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <LoadingContext>
       <AuthProvider>
-        <Layout>
-          <Component {...pageProps} /> {/* Removi o ponto e vírgula aqui */}
+        <Layout> {/* Agora sem a propriedade zoomLevel, pois ela é opcional */}
+          <Component {...pageProps} />
         </Layout>
       </AuthProvider>
     </LoadingContext>
