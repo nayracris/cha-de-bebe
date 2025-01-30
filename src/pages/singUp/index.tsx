@@ -40,7 +40,7 @@ export default function SingUpForm() {
       onSubmit={handleSubmit}
     >
       <fieldset className="w-full h-full flex flex-col justify-between gap-1 border-t border-t-zinc-400 rounded-sm">
-        <legend className="font-pacifico font-medium mb-9 text-2xl">
+        <legend className="font-playwriteIN font-medium mb-9 text-2xl">
           Registre-se
         </legend>
         <label className="w-full" htmlFor="username">
@@ -72,11 +72,11 @@ export default function SingUpForm() {
             className="w-full px-2 py-1 placeholder:text-zinc-700"
           />
           <div className="w-full text-sm italic text-zinc-700 py-1">
-            {"ex: Rafael Sant'Anna"}
+            {""}
           </div>
         </label>
         <button
-          className="text-green-600 border border-green-600 px-2 py-2 hover:bg-green-600 hover:text-zinc-900 font-semibold transition-colors duration-300 rounded-sm mt-2"
+          className="text-blue-600 border border-blue-400 px-2 py-2 hover:bg-blue-300 hover:text-zinc-900 font-semibold transition-colors duration-300 rounded-sm mt-0"
           type="submit"
         >
           Cadastrar

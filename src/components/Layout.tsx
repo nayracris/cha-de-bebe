@@ -8,9 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 interface LayoutProps {
   children: React.ReactNode;
+  zoomLevel: number; // Nova propriedade para controlar o zoom da imagem
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, zoomLevel = 1 }: LayoutProps) {
   return (
     <>
       <Head>
@@ -25,16 +26,26 @@ export function Layout({ children }: LayoutProps) {
         className="flex flex-col w-full min-h-[calc(100vh-112px)] relative scrollbar-thin scrollbar-track-zinc-50 scrollbar-thumb-zinc-900"
       >
         {children}
-        <div className="absolute z-0 w-full h-full flex items-center justify-center top-0 left-0">
+
+        {/* Imagem de fundo com zoom controlado */}
+        <div
+          className="absolute top-0 left-0 w-full h-full z-0"
+          style={{
+            transform: `scale(1)`, // Ajuste o zoom com a escala
+            transformOrigin: "center", // Garante que o zoom aconteça a partir do centro
+          }}
+        >
           <Image
-            priority
-            alt="bebe elefante"
-            src="/baby-elephant.png"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-[500px] h-[500px]"
-          />
+             priority
+             alt="fundo elefante"
+             src="/balao.png" // Caminho para a imagem
+             layout="fill"
+             objectFit="cover"
+             objectPosition="center"
+             className="z-0"
+             quality={100} // Configura a qualidade para o máximo
+             unoptimized // Desativa otimizações automáticas do Next.js
+              />
         </div>
       </main>
       <Loading />
@@ -53,3 +64,5 @@ export function Layout({ children }: LayoutProps) {
     </>
   );
 }
+
+

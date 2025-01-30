@@ -42,25 +42,36 @@ export default function List({
     <>
       {isAuthenticated && (
         <div className="mx-auto py-6 w-full max-w-3xl bg-opaque-600 relative z-40 h-[calc(100vh-112px)] overflow-y-auto scrollbar-thin scrollbar-track-zinc-50 scrollbar-thumb-zinc-900">
-          <ConfirmedPresence />
+          {/* Texto de boas-vindas */}
           <section className="mx-auto rounded-b-lg flex flex-col items-center justify-center gap-6 max-w-xl p-2 text-zinc-900 relative z-40">
             <Notes />
           </section>
+
+          {/* Lista do Bebê */}
           <section className="h-max relative z-40 py-6">
             <div className="h-max flex flex-col items-center py-2 rounded-lg w-11/12 mx-auto">
               <h2 className="text-zinc-900 font-pacifico text-2xl mb-1">
-                Minha lista:
+                Lista de Presentes:
+              </h2>
+              <ListMissingItems items={items} refreshItems={refreshItems} />
+            </div>
+          </section>
+
+          {/* Botão de confirmação */}
+          <section className="mx-auto rounded-b-lg flex flex-col items-center justify-center gap-6 max-w-xl p-2 text-zinc-900 relative z-40">
+            <ConfirmedPresence />
+          </section>
+
+          {/* Minha Lista */}
+          <section className="h-max relative z-40 py-6">
+            <div className="h-max flex flex-col items-center py-2 rounded-lg w-11/12 mx-auto">
+              <h2 className="text-zinc-900 font-pacifico text-2xl mb-1">
+                Meus Presentes:
               </h2>
               <ListUserItems
                 userItems={userItems}
                 refreshItems={refreshItems}
               />
-            </div>
-            <div className="h-max flex flex-col items-center py-2 rounded-lg w-11/12 mx-auto">
-              <h2 className="text-zinc-900 font-pacifico text-2xl mb-1">
-                Lista do Bebê:
-              </h2>
-              <ListMissingItems items={items} refreshItems={refreshItems} />
             </div>
           </section>
         </div>

@@ -11,20 +11,14 @@ export function Header() {
   const { user, isAuthenticated, logout } = useAuthContext();
 
   const isSingUp = router.pathname === "/singUp";
-
   const isHome = router.pathname === "/home";
-
   const showSingButton = router.pathname !== "/list";
-
   const isList = !showSingButton;
 
   const getUserName = useCallback(() => {
-    if (isList) {
-      if (user?.name) {
-        const [firstName] = user.name.split(" ");
-
-        setName(firstName);
-      }
+    if (isList && user?.name) {
+      const [firstName] = user.name.split(" ");
+      setName(firstName);
     }
   }, [isList, user]);
 
@@ -34,16 +28,18 @@ export function Header() {
   }, [getUserName]);
 
   return (
-    <header className="w-full h-28 py-4 bg-zinc-900 flex items-center justify-between flex-col gap-2 relative z-40">
+    <header
+      className="w-full h-36 py-6 flex items-center justify-between flex-col gap-2 relative z-50 bg-transparent"
+    >
       {isList && isAuthenticated && (
         <>
-          <div className="absolute text-zinc-200 text-base left-3 bottom-3">
+          <div className="absolute text-zinc-800 text-base left-3 bottom-3">
             <p>Seja bem-vindo(a)</p>
-            <p className="font-semibold italic text-green-500">{name}!</p>
+            <p className="font-semibold italic text-blue-500">{name}!</p>
           </div>
-          <div className="absolute text-zinc-200 text-sm right-4 top-4">
+          <div className="absolute text-zinc-800 text-sm right-4 top-4">
             <button
-              className="border font-semibold border-green-600 rounded-sm px-2 hover:bg-green-600 hover:text-zinc-900 transition-colors duration-300"
+              className="border font-semibold border-blue-600 rounded-sm px-2 hover:bg-blue-600 hover:text-zinc-900 transition-colors duration-300"
               onClick={logout}
             >
               Sair
@@ -51,19 +47,17 @@ export function Header() {
           </div>
         </>
       )}
-      <h1 className="text-4xl text-zinc-200 italic font-pacifico">
+      <h1 className="text-6xl text-blue-400 italic font-playwriteIN tracking-wide">
         Chá de Bebê
       </h1>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center mt-0">
         {showSingButton && !isAuthenticated ? (
           <Link
-            className="flex justify-center items-center text-green-500 font-semibold border border-green-600 hover:bg-green-600 hover:text-zinc-900 transition-colors duration-300 rounded-sm mr-2"
+            className="flex justify-center items-center text-zinc-900 font-semibold border border-blue-400 hover:bg-blue-400 hover:text-zinc-800 transition-colors duration-300 rounded-sm mr-2 mt-2"
             href={isSingUp || isHome ? "/singIn" : "/singUp"}
           >
-            <span className="animate-pulse w-full h-full py-1 px-2 hover:animate-none">
-              {isSingUp || isHome
-                ? "Entre na sua lista aqui"
-                : "Registre-se aqui"}
+            <span className="animate-pulse w-full h-full py-0.5 px-1 hover:animate-none">
+              {isSingUp || isHome ? "Entrar" : "Registrar"}
             </span>
           </Link>
         ) : (
@@ -72,19 +66,17 @@ export function Header() {
           </span>
         )}
         {isHome && (
-          <>
-            <span className="text-zinc-200 mr-2 flex items-center">ou</span>
-            <Link
-              className="flex justify-center items-center text-green-500 font-semibold border border-green-600 hover:bg-green-600 hover:text-zinc-900 transition-colors duration-300 rounded-sm mr-2"
-              href="/singUp"
-            >
-              <span className="animate-pulse w-full h-full py-1 px-2 hover:animate-none">
-                Registre-se aqui
-              </span>
-            </Link>
-          </>
+          <Link
+            className="flex justify-center items-center text-zinc-800 font-semibold border border-blue-400 hover:bg-blue-400 hover:text-zinc-900 transition-colors duration-300 rounded-sm mr-2 mt-2"
+            href="/singUp"
+          >
+            <span className="animate-pulse w-full h-full py-0.5 px-1 hover:animate-none">
+              Registrar
+            </span>
+          </Link>
         )}
       </div>
     </header>
   );
 }
+

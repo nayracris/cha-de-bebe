@@ -15,34 +15,37 @@ export function ListMissingItems({
 }: ListMissingItemsProps) {
   const router = useRouter();
   const isList = router.pathname === "/list";
+
   return (
     <div className="max-w-3xl w-full mx-auto border-2 border-zinc-200 rounded-lg relative z-40 h-[500px]">
-      <div className="bg-zinc-900 rounded-t-lg text-xl h-7 flex justify-center items-center text-zinc-200">
+      {/* Cabeçalho com azul claro bebê */}
+      <div className="bg-custom-paleBlue rounded-t-lg text-xl h-7 flex justify-center items-center text-zinc-900">
         <span className="flex items-center justify-center font-semibold w-[70%]">
-          Item
+          Presente
         </span>
         {isList && (
           <span className="flex items-center justify-center w-[39%] font-semibold">
-            Marcar
+            Selecionar
           </span>
         )}
       </div>
+      {/* Corpo da lista */}
       <div className="bg-opaque-500 overflow-y-auto h-[calc(100%-28px)] w-full scrollbar-thin scrollbar-track-zinc-50 scrollbar-thumb-zinc-900">
         {items.map(({ id, item }, index) => (
           <div
             key={id}
-            className={`flex justify-center items-center h-max hover:bg-green-100 cursor-pointer ${
-              index % 2 === 0 ? "bg-opaque-500" : "bg-silver-opaque-500"
-            } py-6`}
+            className={`flex justify-center items-center h-max hover:bg-blue-300 cursor-pointer ${
+              index % 2 === 0 ? "bg-blue-100" : "bg-custom-softGray"
+            } py-2`}
           >
             <label
               htmlFor={`${id}`}
-              className="cursor-pointer text-zinc-900 flex items-center justify-center h-full text-center text-lg font-medium px-2 py-1 w-[61%]"
+              className="cursor-pointer text-zinc-900 flex items-center justify-center h-full text-center text-lg font-medium px-1 py-0.5 w-[61%]"
             >
               {item}
             </label>
             {isList && (
-              <span className="flex items-center justify-center w-[39%] h-full text-center text-lg px-2 py-1">
+              <span className="flex items-center justify-center w-[39%] h-full text-center text-lg px-1 py-0.5">
                 <SetItemCheckbox
                   itemId={id}
                   changeItem={refreshItems!}
@@ -52,11 +55,12 @@ export function ListMissingItems({
             )}
           </div>
         ))}
+        {/* Mensagem quando não há itens */}
         {!items.length && (
           <div className="gap-4 flex flex-col justify-center items-center h-full text-center font-pacifico text-lg">
-            Não há itens disponíveis!
+            Não há mais presentes disponíveis!
             <br />
-            Obrigado por ajudar a completar a lista.
+            Agradeço pela sua participação!
             <Image
               src="/baby_elephant_thanks.png"
               width={0}

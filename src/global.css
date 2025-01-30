@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+IN:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+  @apply bg-transparent;
+}
+header {
+  @apply bg-transparent;
+}
+
 input {
+
   @apply outline-none border border-zinc-200 focus:border-teal-500 rounded-sm h-14;
 }
 
@@ -15,4 +25,6 @@ input {
 .text-stroke-white {
   -webkit-text-stroke: 0.5px #fff;
   text-stroke: 0.5px #fff;
+
+  
 }

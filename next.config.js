@@ -9,6 +9,9 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    domains: ['i.pinimg.com'], // Adicione o domínio da imagem externa aqui
+  },
 };
 
 module.exports = nextConfig;

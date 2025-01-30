@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         pacifico: ["Pacifico", "cursive"],
+        playwriteIN: ["Playwrite IN", "serif"], // Nome da fonte correta
       },
       colors: {
         opaque: {
@@ -16,6 +17,13 @@ module.exports = {
         },
         "silver-opaque": {
           500: "rgb(212, 212, 216, 0.5)",
+        },
+        custom: {
+          teal: "#96bebd", // Tom de azul-esverdeado
+          deepBlue: "#00486b", // Azul escuro
+          lightGray: "#c1c1c1", // Cinza claro
+          paleBlue: "#c4d6da", // Azul pálido
+          softGray: "#e6e6e6", // Cinza suave
         },
       },
       keyframes: {

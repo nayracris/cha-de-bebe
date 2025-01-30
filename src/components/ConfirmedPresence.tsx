@@ -27,7 +27,7 @@ export function ConfirmedPresence() {
         htmlFor="confirmedPresence"
         className="relative z-50 w-80 flex items-center justify-center gap-2 h-full cursor-pointer"
       >
-        <div className="rounded-full w-full absolute top-0 left-0 h-12 animate-pulse bg-green-300 z-10"></div>
+        <div className="rounded-full w-full absolute top-0 left-0 h-12 animate-pulse bg-blue-300 z-10"></div>
         <h2 className="text-xl font-pacifico relative z-50">
           Confirme sua presença aqui:
         </h2>
