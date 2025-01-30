@@ -8,10 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 interface LayoutProps {
   children: React.ReactNode;
-  zoomLevel?: number; // Torna zoomLevel opcional
+  zoomLevel?: number;
 }
 
-export function Layout({ children, zoomLevel = 1 }: LayoutProps) {
+export function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>
