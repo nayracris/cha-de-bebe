@@ -1,6 +1,7 @@
+import React from "react";
 import { Items } from "@prisma/client";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/router";
 import { SetItemCheckbox } from "./SetItemCheckbox";
 
 interface ListUserItemsProps {
@@ -9,6 +10,11 @@ interface ListUserItemsProps {
 }
 
 export function ListUserItems({ userItems, refreshItems }: ListUserItemsProps) {
+  const router = useRouter();
+  const isList = router.pathname === "/list";
+
+  console.log("Itens do usuário recebidos no ListUserItems:", userItems); // Log dos itens do usuário
+
   return (
     <div className="max-w-3xl w-full mx-auto border-2 border-zinc-200 rounded-lg relative z-40 h-[500px]">
       <div className="bg-custom-paleBlue rounded-t-lg text-lg h-7 flex justify-center items-center text-zinc-800">

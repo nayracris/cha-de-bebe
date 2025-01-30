@@ -16,6 +16,8 @@ export function ListMissingItems({
   const router = useRouter();
   const isList = router.pathname === "/list";
 
+  console.log("Itens recebidos no ListMissingItems:", items); // Log dos itens recebidos
+
   return (
     <div className="max-w-3xl w-full mx-auto border-2 border-zinc-200 rounded-lg relative z-40 h-[500px]">
       {/* Cabeçalho com azul claro bebê */}
@@ -41,8 +43,7 @@ export function ListMissingItems({
             >
               <label
                 htmlFor={`${id}`}
-                className="cursor-pointer text-zinc-900 flex items-center justify-center h-full text-center text-lg font-medium px-1 py-0.5 w-[61%]"
-              >
+                className="cursor-pointer text-zinc-900 flex items-center justify-center h-full text-center text-lg font-medium px-1 py-0.5 w-[61%]">
                 {item}
               </label>
               {isList && (
