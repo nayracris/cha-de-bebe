@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import { Items } from "@prisma/client";
 import nc from "next-connect";
 import cors from "cors";
-import { corsOptions } from "../..//_utils/_cors.options";
+import { corsOptions } from "../../_utils/_cors.options";
 
 interface Response {
   message: string;

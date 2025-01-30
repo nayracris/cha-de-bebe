@@ -20,7 +20,6 @@ export class SingInService {
   private createJwtToken(payload: ITokenPayload) {
     const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
       algorithm: "HS256",
-      expiresIn: "1d",
     });
 
     return token;

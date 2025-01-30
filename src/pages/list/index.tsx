@@ -29,7 +29,6 @@ export default function List({
     const token = parseCookies(null)[USER_TOKEN];
 
     if (!token) {
-      // Se não houver token, redireciona para a página de login
       window.location.href = "/singIn";
       return;
     }
@@ -38,8 +37,12 @@ export default function List({
 
     try {
       const [listResponse, userListResponse] = await Promise.all([
-        api.get(LIST_URL),
-        api.get(USER_LIST_URL),
+        api.get(LIST_URL, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        api.get(USER_LIST_URL, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
       ]);
       setItems(listResponse.data);
       setUserItems(userListResponse.data);
@@ -52,23 +55,18 @@ export default function List({
 
   useEffect(() => {
     if (isAuthenticated) {
-      refreshItems(); // Chama refreshItems quando o usuário estiver autenticado
+      refreshItems();
     }
   }, [isAuthenticated]);
-
-  console.log("Itens no estado:", items);
-  console.log("Itens do usuário no estado:", userItems);
 
   return (
     <>
       {isAuthenticated ? (
         <div className="mx-auto py-6 w-full max-w-3xl bg-opaque-600 relative z-40 h-[calc(100vh-112px)] overflow-y-auto scrollbar-thin scrollbar-track-zinc-50 scrollbar-thumb-zinc-900">
-          {/* Texto de boas-vindas */}
           <section className="mx-auto rounded-b-lg flex flex-col items-center justify-center gap-6 max-w-xl p-2 text-zinc-900 relative z-40">
             <Notes />
           </section>
 
-          {/* Lista de Presentes Disponíveis */}
           <section className="h-max relative z-40 py-6">
             <div className="h-max flex flex-col items-center py-2 rounded-lg w-11/12 mx-auto">
               <h2 className="text-zinc-900 font-pacifico text-2xl mb-1">
@@ -78,19 +76,17 @@ export default function List({
             </div>
           </section>
 
-          {/* Botão de confirmação */}
           <section className="mx-auto rounded-b-lg flex flex-col items-center justify-center gap-6 max-w-xl p-2 text-zinc-900 relative z-40">
             <ConfirmedPresence />
           </section>
 
-          {/* Minha Lista (opcional, se necessário) */}
           <section className="h-max relative z-40 py-6">
             <div className="h-max flex flex-col items-center py-2 rounded-lg w-11/12 mx-auto">
               <h2 className="text-zinc-900 font-pacifico text-2xl mb-1">
                 Meus Presentes:
               </h2>
               <ListUserItems
-                userItems={userItems} // Passando userItems corretamente
+                userItems={userItems}
                 refreshItems={refreshItems}
               />
             </div>

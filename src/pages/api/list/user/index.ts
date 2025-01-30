@@ -30,3 +30,4 @@ export default nc<NextApiRequest, NextApiResponse<Response | Items[]>>()
       res.status(code || StatusCodes.INTERNAL_SERVER_ERROR).json({ message });
     }
   });
+
